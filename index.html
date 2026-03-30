@@ -1,134 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Pokemon Launcher</title>
+  <title>Pokemon Tracker</title>
 </head>
-<body style="font-family: Arial; text-align:center; padding:40px;">
+<body style="font-family: Arial; padding:40px; background:#111; color:white;">
 
-<h1>Pokemon Store Launcher</h1>
+<h1>🔥 Pokemon East Bay Tracker</h1>
 
-<input id="search" placeholder="Search Pokémon product" style="padding:10px; width:250px;">
-<br><br>
+<input id="search" placeholder="Search product..." style="padding:10px; width:250px;">
+<button onclick="loadData()">Search</button>
 
-<button onclick="openAll()">Open All Stores</button>
+<h2>Products</h2>
+<div id="products"></div>
+
+<h2>Stores (East Bay)</h2>
+<div id="stores"></div>
 
 <script>
-function openAll() {
-  let q = document.getElementById("search").value || "pokemon cards";
-  let e = encodeURIComponent(q);
 
-  let urls = [
-    "https://www.target.com/s?searchTerm=" + e,
-    "https://www.walmart.com/search?q=" + e,
-    "https://www.costco.com/CatalogSearch?keyword=" + e,
-    "https://www.samsclub.com/s/" + e,
-    "https://www.pokemoncenter.com/search/" + e
-  ];
+async function loadData() {
+  const search = document.getElementById("search").value.toLowerCase();
 
-  urls.forEach(u => window.open(u, "_blank"));
+  const products = await fetch("data/products.json").then(res => res.json());
+  const stores = await fetch("data/stores.json").then(res => res.json());
+
+  // FILTER PRODUCTS
+  const filteredProducts = products.filter(p =>
+    p.name.toLowerCase().includes(search)
+  );
+
+  // SHOW PRODUCTS
+  const productDiv = document.getElementById("products");
+  productDiv.innerHTML = "";
+
+  filteredProducts.forEach(p => {
+    const el = document.createElement("div");
+    el.style.marginBottom = "10px";
+    el.innerHTML = `
+      <strong>${p.name}</strong><br>
+      Keywords: ${p.keywords.join(", ")}<br>
+      Status: ⚠️ Checking...
+    `;
+    productDiv.appendChild(el);
+  });
+
+  // SHOW STORES
+  const storeDiv = document.getElementById("stores");
+  storeDiv.innerHTML = "";
+
+  stores.forEach(s => {
+    const el = document.createElement("div");
+    el.style.marginBottom = "10px";
+    el.innerHTML = `
+      ${s.name} (${s.city})<br>
+      ${s.address}
+    `;
+    storeDiv.appendChild(el);
+  });
 }
+
 </script>
 
 </body>
 </html>
-
-[
-  {
-    "retailer": "Target",
-    "name": "Target Concord",
-    "city": "Concord",
-    "zip": "94520",
-    "address": "1975 Diamond Blvd, Concord, CA"
-  },
-  {
-    "retailer": "Target",
-    "name": "Target Walnut Creek",
-    "city": "Walnut Creek",
-    "zip": "94596",
-    "address": "1871 N Main St, Walnut Creek, CA"
-  },
-  {
-    "retailer": "Target",
-    "name": "Target San Ramon",
-    "city": "San Ramon",
-    "zip": "94583",
-    "address": "6000 Bollinger Canyon Rd, San Ramon, CA"
-  },
-  {
-    "retailer": "Walmart",
-    "name": "Walmart Martinez",
-    "city": "Martinez",
-    "zip": "94553",
-    "address": "1021 Arnold Dr, Martinez, CA"
-  },
-  {
-    "retailer": "Walmart",
-    "name": "Walmart Pittsburg",
-    "city": "Pittsburg",
-    "zip": "94565",
-    "address": "2203 Loveridge Rd, Pittsburg, CA"
-  },
-  {
-    "retailer": "Walmart",
-    "name": "Walmart San Ramon",
-    "city": "San Ramon",
-    "zip": "94583",
-    "address": "9100 Alcosta Blvd, San Ramon, CA"
-  },
-  {
-    "retailer": "Walmart",
-    "name": "Walmart Richmond",
-    "city": "Richmond",
-    "zip": "94806",
-    "address": "1400 Hilltop Mall Rd, Richmond, CA"
-  },
-  {
-    "retailer": "Costco",
-    "name": "Costco Concord",
-    "city": "Concord",
-    "zip": "94520",
-    "address": "2400 Monument Blvd, Concord, CA"
-  },
-  {
-    "retailer": "Costco",
-    "name": "Costco Danville",
-    "city": "Danville",
-    "zip": "94506",
-    "address": "1600 Sycamore Valley Rd, Danville, CA"
-  },
-  {
-    "retailer": "Costco",
-    "name": "Costco San Ramon",
-    "city": "San Ramon",
-    "zip": "94583",
-    "address": "1600 Sycamore Valley Rd, San Ramon, CA"
-  },
-  {
-    "retailer": "Sam's Club",
-    "name": "Sam's Club Concord",
-    "city": "Concord",
-    "zip": "94520",
-    "address": "1225 Concord Ave, Concord, CA"
-  },
-  {
-    "retailer": "Target",
-    "name": "Target Berkeley",
-    "city": "Berkeley",
-    "zip": "94704",
-    "address": "2187 Shattuck Ave, Berkeley, CA"
-  },
-  {
-    "retailer": "Target",
-    "name": "Target Pinole",
-    "city": "Pinole",
-    "zip": "94564",
-    "address": "1400 Fitzgerald Dr, Pinole, CA"
-  },
-  {
-    "retailer": "Target",
-    "name": "Target Oakland",
-    "city": "Oakland",
-    "zip": "94612",
-    "address": "274 Broadway, Oakland, CA"
-  }
-]
