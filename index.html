@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pokemon Launcher</title>
+</head>
+<body style="font-family: Arial; text-align:center; padding:40px;">
+
+<h1>Pokemon Store Launcher</h1>
+
+<input id="search" placeholder="Search Pokémon product" style="padding:10px; width:250px;">
+<br><br>
+
+<button onclick="openAll()">Open All Stores</button>
+
+<script>
+function openAll() {
+  let q = document.getElementById("search").value || "pokemon cards";
+  let e = encodeURIComponent(q);
+
+  let urls = [
+    "https://www.target.com/s?searchTerm=" + e,
+    "https://www.walmart.com/search?q=" + e,
+    "https://www.costco.com/CatalogSearch?keyword=" + e,
+    "https://www.samsclub.com/s/" + e,
+    "https://www.pokemoncenter.com/search/" + e
+  ];
+
+  urls.forEach(u => window.open(u, "_blank"));
+}
+</script>
+
+</body>
+</html>
