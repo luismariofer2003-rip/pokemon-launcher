@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Pokemon 151 Booster Bundle",
+    "keywords": ["pokemon 151", "booster bundle", "151 bundle"],
+    "alerts": true
+  },
+  {
+    "name": "Elite Trainer Box",
+    "keywords": ["elite trainer box", "etb"],
+    "alerts": true
+  },
+  {
+    "name": "Prismatic Evolutions ETB",
+    "keywords": ["prismatic evolutions", "etb prismatic"],
+    "alerts": true
+  },
+  {
+    "name": "Surging Sparks ETB",
+    "keywords": ["surging sparks", "etb sparks"],
+    "alerts": true
+  },
+  {
+    "name": "Pokemon Mini Tins",
+    "keywords": ["mini tin", "pokemon tin"],
+    "alerts": true
+  },
+  {
+    "name": "Booster Box",
+    "keywords": ["booster box", "pokemon box"],
+    "alerts": true
+  },
+  {
+    "name": "Poster Collection",
+    "keywords": ["poster collection"],
+    "alerts": true
+  },
+  {
+    "name": "Collection Box",
+    "keywords": ["collection box", "pokemon collection"],
+    "alerts": true
+  },
+  {
+    "name": "Premium Collection",
+    "keywords": ["premium collection"],
+    "alerts": true
+  }
+]
